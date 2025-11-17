@@ -14,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
+
 
 @Configuration
 @EnableWebSecurity
@@ -26,16 +31,47 @@ public class SecurityConfig {
         this.securityFilter = securityFilter;
     }
 
+    // --- NOVO BEAN: Configuração do CORS ---
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Define quais origens (URLs do front-end) são permitidas.
+        // Adicione a porta do seu Expo Go (ex: 19006, 8081) ou React (3000)
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:19006",
+                "http://localhost:8081",
+                "http://localhost:3000"
+        ));
+
+        // Define quais métodos HTTP são permitidos
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+
+        // Define quais cabeçalhos são permitidos (importante para o 'Authorization')
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-auth-token"));
+
+        // Permite o envio de credenciais (como cookies, se usar)
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // Aplica esta configuração a todos os paths da API
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                //ADICIONA A CONFIGURAÇÃO CORS AO HTTP SECURITY
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -52,4 +88,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-

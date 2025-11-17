@@ -1,7 +1,10 @@
 package com.senac.aponte.dto.response.profile;
 
+import com.senac.aponte.dto.response.photo.PhotoResponseDTO;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ProfileResponseDTO {
     private Integer id;
@@ -12,7 +15,8 @@ public class ProfileResponseDTO {
     private LocalDateTime updatedAt;
     private Integer userId;
 
-    // Getters e Setters manuais
+    private List<PhotoResponseDTO> photos;
+
     public Integer getId() {
         return id;
     }
@@ -69,4 +73,11 @@ public class ProfileResponseDTO {
         this.userId = userId;
     }
 
+    public List<PhotoResponseDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoResponseDTO> photos) {
+        this.photos = photos;
+    }
 }
