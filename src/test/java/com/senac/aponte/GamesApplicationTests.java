@@ -1,10 +1,10 @@
-package com.senac.games;
+package com.senac.aponte;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GamesApplicationTests {
+class AponteApplicationTests {
 
 	@Test
 	void contextLoads() {
