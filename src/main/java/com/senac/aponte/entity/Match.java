@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "match")
+
+@Table(name = "`match`")
 public class Match {
 
     @Id
@@ -33,7 +34,7 @@ public class Match {
     @PrePersist
     protected void onCreate() {
         matchDate = LocalDate.now();
-        expiresAt = LocalDate.now().plusDays(1);
+        expiresAt = LocalDate.now().plusDays(1); // <-- MUDANÇA (Expira ontem)
     }
 
     // --- GETTERS E SETTERS ---

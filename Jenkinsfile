@@ -18,7 +18,7 @@ pipeline {
         // Estágio 1: Puxar o código do GitHub
         stage('Git Checkout') {
             steps {
-          
+
                 cleanWs()
 
                 // Puxa a branch 'main'
