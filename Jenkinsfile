@@ -4,7 +4,7 @@ pipeline {
 
 
     tools {
-        docker 'docker-cli'
+        dockerTool 'docker-cli'
     }
 
 
