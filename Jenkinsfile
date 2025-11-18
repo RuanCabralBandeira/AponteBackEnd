@@ -63,7 +63,7 @@ pipeline {
         }
     }
 
-    // 4. O que fazer no final
+ 
     post {
         success {
             echo "Pipeline concluído com sucesso! Build #${env.BUILD_NUMBER}"
