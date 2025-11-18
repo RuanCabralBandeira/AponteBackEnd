@@ -51,7 +51,7 @@ pipeline {
                         string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET')
                     ]) {
                         sh """
-                        docker run -d -p 8404:8404 \
+                        docker run -d -p 8414:8414 \
                             -e DB_PASSWORD=${DB_PASSWORD} \
                             -e JWT_SECRET=${JWT_SECRET} \
                             --name ${env.CONTAINER_NAME} \
