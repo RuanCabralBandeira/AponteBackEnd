@@ -81,7 +81,7 @@ public class MatchService {
         newMatch.setUser1(currentUser);
         newMatch.setUser2(newMatchedUser);
 
-        // Define expiração
+
         newMatch.setExpiresAt(today.plusDays(1));
 
         Match savedMatch = matchRepository.save(newMatch);

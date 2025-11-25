@@ -14,7 +14,6 @@ public class RegisterRequestDTO {
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
-    // Getters e Setters manuais
     public String getEmail() {
         return email;
     }
