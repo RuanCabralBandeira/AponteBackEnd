@@ -5,7 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class PhotoRequestDTO {
 
-    @NotBlank(message = "URL cannot be blank")
+    @NotBlank(message = "data cannot be blank")
+    private String data;
     private String url;
 
     @NotNull(message = "Order index cannot be null")
@@ -14,6 +15,14 @@ public class PhotoRequestDTO {
     // Getters e Setters manuais
     public String getUrl() {
         return url;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public void setUrl(String url) {

@@ -18,6 +18,10 @@ public class Photo {
     @Column(name = "photo_url", nullable = false)
     private String url;
 
+    @Lob
+    @Column(name = "photo_data", columnDefinition = "MEDIUMBLOB")
+    private byte[] photoData;
+
     @Column(name = "photo_order_index")
     private Integer orderIndex;
 
@@ -71,5 +75,13 @@ public class Photo {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public byte[] getPhotoData() {
+        return photoData;
+    }
+
+    public void setPhotoData(byte[] photoData) {
+        this.photoData = photoData;
     }
 }

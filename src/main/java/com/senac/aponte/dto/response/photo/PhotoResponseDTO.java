@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class PhotoResponseDTO {
     private Integer id;
     private String url;
+    private String data;
     private Integer orderIndex;
     private LocalDateTime uploadedAt;
 
@@ -15,6 +16,14 @@ public class PhotoResponseDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getUrl() {

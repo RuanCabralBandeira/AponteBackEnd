@@ -1,46 +1,51 @@
 package com.senac.aponte.controller;
 
-import com.senac.aponte.dto.request.photo.PhotoRequestDTO;
-import com.senac.aponte.dto.response.photo.PhotoResponseDTO;
-import com.senac.aponte.service.PhotoService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import com.senac.aponte.entity.Photo;
+import com.senac.aponte.entity.Profile;
+import com.senac.aponte.repository.PhotoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/api/photos")
-@Tag(name="Fotos", description = "Endpoints para gerenciamento de fotos de perfis")
+@RequestMapping("/photos")
 public class PhotoController {
 
-    private final PhotoService photoService;
+    @Autowired
+    private PhotoRepository photoRepository;
 
-    public PhotoController(PhotoService photoService) {
-        this.photoService = photoService;
-    }
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("profileId") Integer profileId) { // Recebe o 7 do Postman
 
-    @PostMapping("/profile/{profileId}")
-    @Operation(summary = "Adicionar uma nova foto a um perfil")
-    public ResponseEntity<PhotoResponseDTO> addPhoto(@PathVariable Integer profileId, @Valid @RequestBody PhotoRequestDTO photoRequest) {
-        PhotoResponseDTO newPhoto = photoService.addPhotoToProfile(profileId, photoRequest);
-        return new ResponseEntity<>(newPhoto, HttpStatus.CREATED);
-    }
+        try {
+            Photo photo = new Photo();
+            photo.setPhotoData(file.getBytes());
+            photo.setUrl(file.getOriginalFilename());
+            photo.setUploadedAt(LocalDateTime.now());
 
-    @GetMapping("/profile/{profileId}")
-    @Operation(summary = "Listar todas as fotos de um perfil")
-    public ResponseEntity<List<PhotoResponseDTO>> getPhotos(@PathVariable Integer profileId) {
-        List<PhotoResponseDTO> photos = photoService.getPhotosByProfileId(profileId);
-        return ResponseEntity.ok(photos);
-    }
 
-    @DeleteMapping("/{photoId}")
-    @Operation(summary = "Deletar uma foto pelo seu ID")
-    public ResponseEntity<Void> deletePhoto(@PathVariable Integer photoId) {
-        photoService.deletePhoto(photoId);
-        return ResponseEntity.noContent().build();
+            Profile profile = new Profile();
+            profile.setId(profileId);
+
+            photo.setProfile(profile);
+            // ------------------------
+
+            photoRepository.save(photo);
+
+            return ResponseEntity.ok("Sucesso! Imagem salva com ID: " + photo.getId());
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Isso ajuda a ver o erro no console
+            return ResponseEntity.internalServerError().body("Erro: " + e.getMessage());
+        }
     }
 }
+
