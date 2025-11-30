@@ -73,7 +73,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/photos/upload").permitAll()
 
-                      
+
                         .requestMatchers("/", "/index.html", "/*.apk", "/css/**", "/js/**").permitAll()
                         // ----------------------------------
 
