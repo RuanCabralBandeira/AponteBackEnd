@@ -75,6 +75,7 @@ public class SecurityConfig {
 
 
                         .requestMatchers("/", "/index.html", "/*.apk", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/photos/**").permitAll()
                         // ----------------------------------
 
                         .anyRequest().authenticated()
