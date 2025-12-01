@@ -78,8 +78,7 @@ pipeline {
                     sh "docker rm -v ${appName} || exit 0"
 
                     // CORREÇÃO DE PORTA:
-                    // 8425 (Externa/Faculdade) -> 8080 (Interna/Spring Boot)
-                    sh "docker run -d --name ${appName} -p 8425:8080 ${imageTag}"
+                    sh "docker run -d --name ${appName} -p 8425:8425 ${imageTag}"
                 }
             }
         }
