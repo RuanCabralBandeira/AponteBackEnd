@@ -46,13 +46,13 @@ pipeline {
                 }
             }
         }
-
-        stage('Instalar Dependências (Backend)') {
+   stage('Instalar Dependências') {
             steps {
                 script {
-                    // CORREÇÃO CRÍTICA: Usa ./mvnw em vez de mvn global
-                    sh 'chmod +x mvnw'
-                    sh './mvnw clean package -DskipTests'
+                    // Atualiza o PATH se necessário
+                    env.PATH = "/usr/bin:$PATH"
+                    // Instalar as dependências Maven antes de compilar o projeto
+                    sh 'mvn clean install'  // Instala as dependências do Maven
                 }
             }
         }
