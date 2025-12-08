@@ -74,7 +74,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/photos/upload").permitAll()
 
 
-                        .requestMatchers("/", "/index.html", "/*.apk", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/*.apk", "/css/**", "/js/**","/assets/**").permitAll()
                         .requestMatchers("/photos/**").permitAll()
                         // ----------------------------------
 

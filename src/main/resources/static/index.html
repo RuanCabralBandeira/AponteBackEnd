@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aponte - Slow Dating</title>
     <style>
         /* Reset e Fontes */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #4f46e5, #7e22ce);
@@ -29,9 +35,26 @@
         }
 
         /* Tipografia */
-        h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 800; letter-spacing: -1px; }
-        h3 { font-size: 1.5rem; font-weight: 400; color: #e0e7ff; margin-bottom: 30px; }
-        p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; color: #f3f4f6; }
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #e0e7ff;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #f3f4f6;
+        }
 
         /* Lista de Recursos */
         .features {
@@ -42,7 +65,12 @@
             padding: 20px 30px;
             border-radius: 16px;
         }
-        .features li { list-style: none; margin-bottom: 10px; font-size: 1.1rem; }
+
+        .features li {
+            list-style: none;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
 
         /* Área de Prints (Mockups) */
         .screenshots-container {
@@ -52,6 +80,7 @@
             margin: 40px 0;
             flex-wrap: wrap;
         }
+
         .phone-mockup {
             width: 160px;
             height: 320px;
@@ -65,7 +94,10 @@
             font-size: 0.9rem;
             position: relative;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            /* Garante que a imagem não saia da borda */
         }
+
         /* Simulação de tela dentro do mockup */
         .phone-screen {
             background: #fff;
@@ -80,24 +112,18 @@
             font-weight: bold;
         }
 
-        /* Área de Downloads e QR Code */
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Faz a imagem preencher todo o espaço */
+        }
+
+        /* Área de Downloads */
         .download-area {
             margin-top: 40px;
             padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .qr-placeholder {
-            width: 150px;
-            height: 150px;
-            background-color: white;
-            margin: 0 auto 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-weight: bold;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Botões */
@@ -107,6 +133,7 @@
             gap: 15px;
             flex-wrap: wrap;
         }
+
         .btn {
             display: flex;
             align-items: center;
@@ -120,88 +147,107 @@
             transition: all 0.2s ease;
             cursor: pointer;
         }
+
         .btn-android {
             background-color: white;
             color: #4f46e5;
         }
-        .btn-ios {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .btn-android:hover { background-color: #f3f4f6; }
-        .btn-ios:hover { background-color: rgba(255,255,255,0.1); }
 
-        .footer { margin-top: 50px; font-size: 0.8rem; opacity: 0.7; }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-android:hover {
+            background-color: #f3f4f6;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
 
         /* Responsividade */
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .btn-group { flex-direction: column; }
-            .screenshots-container { gap: 10px; }
-            .phone-mockup { width: 100px; height: 200px; font-size: 0.7rem; }
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .screenshots-container {
+                gap: 10px;
+            }
+
+            .phone-mockup {
+                width: 100px;
+                height: 200px;
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>⏰ Aponte</h1>
-    <h3>Conexões reais, no seu tempo.</h3>
+    <div class="container">
+        <h1>⏰ Aponte</h1>
+        <h3>Conexões reais, no seu tempo.</h3>
 
-    <p>
-        O <strong>Aponte</strong> é uma solução de "Slow Dating" projetada para combater a ansiedade dos apps modernos.
-        Nossa regra de negócio exclusiva entrega <strong>um único match por dia</strong>, com um chat que expira em 24 horas,
-        incentivando o foco total e conversas significativas.
-    </p>
+        <p>
+            O <strong>Aponte</strong> é uma solução de "Slow Dating" projetada para combater a ansiedade dos apps
+            modernos.
+            Nossa regra de negócio exclusiva entrega <strong>um único match por dia</strong>, com um chat que expira em
+            24 horas,
+            incentivando o foco total e conversas significativas.
+        </p>
 
-    <div class="features">
-        <ul>
-            <li>✨ <strong>Match Único:</strong> Qualidade acima de quantidade.</li>
-            <li>⏳ <strong>Timer de 24h:</strong> Incentivo à proatividade.</li>
-            <li>🔒 <strong>Segurança:</strong> Ambiente monitorado e seguro.</li>
-            <li>📱 <strong>Multiplataforma:</strong> Android e iOS.</li>
-        </ul>
-    </div>
+        <div class="features">
+            <ul>
+                <li>✨ <strong>Match Único:</strong> Qualidade acima de quantidade.</li>
+                <li>⏳ <strong>Timer de 24h:</strong> Incentivo à proatividade.</li>
+                <li>🔒 <strong>Segurança:</strong> Ambiente monitorado e seguro.</li>
+                <li>📱 <strong>Plataforma:</strong> Exclusivo para Android.</li>
+            </ul>
+        </div>
 
-    <h4 style="margin-bottom: 15px; opacity: 0.9;">Prévia do Aplicativo</h4>
-    <div class="screenshots-container">
-        <div class="phone-mockup">
-            <div class="phone-screen">
-                Login
+        <h4 style="margin-bottom: 15px; opacity: 0.9;">Prévia do Aplicativo</h4>
+        <div class="screenshots-container">
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <img src="assets/login.png" alt="Tela de Login do Aponte">
+                </div>
+            </div>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <img src="assets/match.png" alt="Tela de Match do Aponte">
+                </div>
+            </div>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <img src="assets/chat.png" alt="Tela de Chat do Aponte">
+                </div>
             </div>
         </div>
-        <div class="phone-mockup">
-            <div class="phone-screen">
-                Match do Dia
-            </div>
-        </div>
-        <div class="phone-mockup">
-            <div class="phone-screen">
-                Chat
+
+        <div class="download-area">
+            <p>Baixe agora e comece a usar:</p>
+
+            <div class="btn-group">
+                <a href="app.aponte.apk" class="btn btn-android" download>
+                    🤖 Baixar APK (Android)
+                </a>
             </div>
         </div>
     </div>
 
-    <div class="download-area">
-        <p>Escolha sua plataforma abaixo:</p>
-
-        <div class="btn-group">
-            <a href="app.aponte.apk" class="btn btn-android" download>
-                🤖 Baixar APK (Android)
-            </a>
-
-            <a href="#" class="btn btn-ios" target="_blank">
-                🍏 Abrir no Expo (iOS/Android)
-            </a>
-        </div>
+    <div class="footer">
+        <p>Projeto Integrador - Senac Rio | Desenvolvido com Spring Boot e React Native</p>
     </div>
-</div>
-
-<div class="footer">
-    <p>Projeto Integrador - Senac Rio | Desenvolvido com Spring Boot e React Native</p>
-</div>
 
 </body>
+
 </html>
